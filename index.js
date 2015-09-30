@@ -26,7 +26,7 @@ function jspmBuild(options) {
             stream.end();
         })
         .catch(function(e){
-            stream.emit.bind(stream, e);
+            stream.destroy(e);
         });
 
     return stream;

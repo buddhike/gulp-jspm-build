@@ -4,8 +4,9 @@
   "description": "Gulp task to run jspm build.",
   "main": "index.js",
   "scripts": {
-    "test": "npm run jshint && npm run jasmine",
+    "test": "npm run jshint && npm run istanbul",
     "jasmine": "jasmine",
+    "istanbul": "istanbul cover --include-all-sources jasmine",
     "jshint": "jshint index.js spec"
   },
   "keywords": [
@@ -26,6 +27,7 @@
     "vinyl": "^1.0.0"
   },
   "devDependencies": {
+    "istanbul": "^0.3.21",
     "jasmine": "^2.3.2",
     "jshint": "^2.8.0",
     "proxyquire": "^1.7.2"
