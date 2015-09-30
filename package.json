@@ -1,0 +1,29 @@
+{
+  "name": "gulp-jspm-build",
+  "version": "0.0.1",
+  "description": "Gulp task to run jspm build.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run jshint && npm run jasmine",
+    "jasmine": "jasmine",
+    "jshint": "jshint index.js spec"
+  },
+  "keywords": [
+    "jspm",
+    "gulp"
+  ],
+  "author": "Buddhike de Silva",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "lodash": "^3.10.1",
+    "systemjs-builder": "^0.14.6",
+    "through2": "^2.0.0",
+    "vinyl": "^1.0.0"
+  },
+  "devDependencies": {
+    "jasmine": "^2.3.2",
+    "jshint": "^2.8.0",
+    "proxyquire": "^1.7.2"
+  }
+}
