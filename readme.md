@@ -1,7 +1,5 @@
 #gulp-jspm-build
-custom gulp task to run jspm build and produce output as a Vinyl stream.
-
-This project is under development and not ready for production yet.
+custom gulp task to run jspm build and produce output as a vinyl stream.
 
 #Install
 
@@ -15,7 +13,7 @@ var jspm = require('gulp-jspm-build');
 gulp.task('jspm', function(){
     jspm({
         bundles: [
-            { src: 'app/app', dst: 'app.js', options: { sourceMaps: true, minify: true} }
+            { src: 'app/app', dst: 'app.js' }
         ]
     })
     .pipe(gulp.dest('.dist'));
