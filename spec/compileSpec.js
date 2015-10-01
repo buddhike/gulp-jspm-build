@@ -1,31 +1,31 @@
 var _ = require('lodash');
 var proxyquire = require('proxyquire');
 
+var builder = jasmine.createSpyObj('bundle', ['config', 'bundle']);
+builder.bundle.and.returnValue(Promise.resolve({
+    source: 'source',
+    sourceMap: 'source-map',
+    modules: []
+}));
+
+var compile = proxyquire('../lib/compile', {
+    'systemjs-builder': function () {
+        _.assign(this, builder);
+    }
+});
+
 describe('compile', function() {
-    var builder = jasmine.createSpyObj('bundle', ['config', 'bundle']);
-    builder.bundle.and.returnValue(Promise.resolve({
-        source: 'source',
-        sourceMap: 'source-map',
-        modules: []
-    }));
-
-    var compile = proxyquire('../lib/compile', {
-        'systemjs-builder': function () {
-            _.assign(this, builder);
-        }
-    });
-
     it('should invoke builder for each bundle', function(done) {
         compile({
             config: { },
             bundles: [
-                { src: 'a', dst: 'b', options: 'c' },
+                { src: 'a', dst: 'b', options: { minify: true } },
                 { src: 'e', dst: 'f'}
             ]}
         )
         .then(function() {
-            expect(builder.bundle).toHaveBeenCalledWith('a', 'b', 'c');
-            expect(builder.bundle).toHaveBeenCalledWith('e', 'f', undefined);
+            expect(builder.bundle).toHaveBeenCalledWith('a', 'b', { minify: true });
+            expect(builder.bundle).toHaveBeenCalledWith('e', 'f', {});
             done();
         });
     });
@@ -73,6 +73,40 @@ describe('compile', function() {
         })
         .catch(function(e) {
             done.fail(e);
+        });
+    });
+});
+
+describe('passing options to system builder', function() {
+    it('should pass the global options specified', function(done) {
+        var opts = {
+            minify: true
+        };
+
+        compile({
+            bundleOptions: opts,
+            bundles: [ { src: 'a', dst: 'b' }]
+        })
+        .then(function() {
+            expect(builder.bundle).toHaveBeenCalledWith('a', 'b', opts);
+            done();
+        });
+    });
+
+    it('should pass the overrides specified for each bundle', function(done) {
+        var opts = {
+            minify: true
+        };
+
+        compile({
+            bundleOptions: {
+                minify: false
+            },
+            bundles: [ { src: 'a', dst: 'b', options: opts }]
+        })
+        .then(function() {
+            expect(builder.bundle).toHaveBeenCalledWith('a', 'b', opts);
+            done();
         });
     });
 });
