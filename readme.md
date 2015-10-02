@@ -2,6 +2,8 @@ gulp-jspm-build
 ===
 gulp task to run jspm build and produce output as a vinyl stream.
 
+[![Build Status](https://travis-ci.org/buddhike/gulp-jspm-build.svg?branch=master)](https://travis-ci.org/buddhike/gulp-jspm-build)
+
 # Install
 
 ```npm install gulp-jspm-build```
