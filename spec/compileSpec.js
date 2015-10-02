@@ -1,8 +1,13 @@
 var _ = require('lodash');
 var proxyquire = require('proxyquire');
 
-var builder = jasmine.createSpyObj('bundle', ['config', 'bundle']);
+var builder = jasmine.createSpyObj('bundle', ['config', 'bundle', 'buildStatic']);
 builder.bundle.and.returnValue(Promise.resolve({
+    source: 'source',
+    sourceMap: 'source-map',
+    modules: []
+}));
+builder.buildStatic.and.returnValue(Promise.resolve({
     source: 'source',
     sourceMap: 'source-map',
     modules: []
@@ -56,6 +61,19 @@ describe('compile', function() {
         })
         .catch(function(e) {
             done.fail(e);
+        });
+    });
+});
+
+describe('options', function() {
+    it('should call buildStatic when the bundleSfx option is specified', function(done) {
+        compile({
+            bundles: [ { src: 'a', dst: 'b' } ],
+            bundleSfx: true
+        })
+        .then(function() {
+            expect(builder.buildStatic).toHaveBeenCalled();
+            done();
         });
     });
 });
