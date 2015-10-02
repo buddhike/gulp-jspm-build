@@ -55,6 +55,9 @@ arguments to ```systemjs-builder``` in following format.
 Same as ```options``` for individual bundle but specifies common options for all
 bundles.
 
+## config
+Optional, the jspm configuration file to use.
+
 ## configOverride
 Override sections of config.js. This could be useful if you want to change things
 like baseURL.
@@ -64,6 +67,15 @@ configOverride: {
     baseURL: '/foo'
 }
 ```
+
+## baseUrl
+The jspm base URL, as normally specified in your ```package.json``` under ```config.jspm.directories.baseURL```. Defaults to ```'.'```.
+
+## bundleSfx
+Create a single file executable, including all necessary dependencies and systemjs. Defaults to ```false```.
+
+> See the [jspm documentation](https://github.com/jspm/jspm-cli/blob/master/docs/production-workflows.md#creating-a-self-executing-bundle)
+  for more information.
 
 # Example
 
