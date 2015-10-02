@@ -24,8 +24,8 @@ describe('compile', function() {
             ]}
         )
         .then(function() {
-            expect(builder.bundle).toHaveBeenCalledWith('a', 'b', { minify: true });
-            expect(builder.bundle).toHaveBeenCalledWith('e', 'f', {});
+            expect(builder.bundle).toHaveBeenCalledWith('a', { minify: true });
+            expect(builder.bundle).toHaveBeenCalledWith('e', {});
             done();
         });
     });
@@ -108,7 +108,7 @@ describe('passing options to system builder', function() {
             bundles: [ { src: 'a', dst: 'b' }]
         })
         .then(function() {
-            expect(builder.bundle).toHaveBeenCalledWith('a', 'b', opts);
+            expect(builder.bundle).toHaveBeenCalledWith('a', opts);
             done();
         });
     });
@@ -125,7 +125,7 @@ describe('passing options to system builder', function() {
             bundles: [ { src: 'a', dst: 'b', options: opts }]
         })
         .then(function() {
-            expect(builder.bundle).toHaveBeenCalledWith('a', 'b', opts);
+            expect(builder.bundle).toHaveBeenCalledWith('a', opts);
             done();
         });
     });
