@@ -1,13 +1,12 @@
 ---
 language: node_js
-node_js:  
+node_js:
   - 'iojs'
 env:
   global:
     - COVERAGE=false
 matrix:
   include:
-    - node_js: "0.12"
-      env: COVERAGE=true
+    - env: COVERAGE=true
 after_success:
   - "[ $COVERAGE == false ] || npm run istanbul -- --report text-summary"
