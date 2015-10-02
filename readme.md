@@ -1,5 +1,7 @@
 gulp-jspm-build
 ===
+
+[![Join the chat at https://gitter.im/buddhike/gulp-jspm-build](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/buddhike/gulp-jspm-build?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 gulp task to run jspm build and produce output as a vinyl stream.
 
 [![Build Status](https://travis-ci.org/buddhike/gulp-jspm-build.svg?branch=master)](https://travis-ci.org/buddhike/gulp-jspm-build)
