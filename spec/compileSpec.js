@@ -58,10 +58,30 @@ describe('compile', function() {
             done.fail(e);
         });
     });
+});
 
-    it('should return a vinyl file for source maps', function(done) {
+describe('source maps', function() {
+    it('should generate when bundle level option is on', function(done) {
         compile({
             bundles: [ { src: 'a', dst: 'b', options: { sourceMaps: true } } ]
+        })
+        .then(function(result){
+            var sourceMapFile = _.find(result.files, function(f) {
+                return f.path === 'b.map';
+            });
+
+            expect(sourceMapFile.contents.toString()).toBe('source-map');
+            done();
+        })
+        .catch(function(e) {
+            done.fail(e);
+        });
+    });
+
+    it('should generate when global option is on', function(done) {
+        compile({
+            bundleOptions: { sourceMaps: true },
+            bundles: [ { src: 'a', dst: 'b' } ]
         })
         .then(function(result){
             var sourceMapFile = _.find(result.files, function(f) {
