@@ -78,7 +78,7 @@ describe('options', function() {
     });
 });
 
-describe('source maps', function() {
+describe('source maps on', function() {
     it('should generate when bundle level option is on', function(done) {
         compile({
             bundles: [ { src: 'a', dst: 'b', options: { sourceMaps: true } } ]
@@ -107,6 +107,44 @@ describe('source maps', function() {
             });
 
             expect(sourceMapFile.contents.toString()).toBe('source-map');
+            done();
+        })
+        .catch(function(e) {
+            done.fail(e);
+        });
+    });
+
+    it('should append source maps location to the end of source file', function(done) {
+        compile({
+            bundleOptions: { sourceMaps: true },
+            bundles: [ { src: 'a', dst: 'b' } ]
+        })
+        .then(function(result) {
+            var source = _.find(result.files, function(f) {
+                return f.path === 'b';
+            });
+
+            var content = source.contents.toString();
+            expect(content).toBe('source\n//# sourceMappingUrl=b.map');
+            done();
+        })
+        .catch(function(e) {
+            done.fail(e);
+        });
+    });
+});
+
+describe('source maps off', function() {
+    it('should not generate the maps file', function(done) {
+        compile({
+            bundles: [ { src: 'a', dst: 'b' } ]
+        })
+        .then(function(result){
+            var sourceMapFile = _.any(result.files, function(f) {
+                return f.path === 'b.map';
+            });
+
+            expect(sourceMapFile).toBe(false);
             done();
         })
         .catch(function(e) {
