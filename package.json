@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "gulp": "^3.9.0",
+    "json-stable-stringify": "^1.0.1",
     "lodash": "^3.10.1",
     "systemjs-builder": "^0.14.6",
     "through2": "^2.0.0",
