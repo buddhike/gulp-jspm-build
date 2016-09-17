@@ -125,7 +125,7 @@ describe('source maps on', function() {
             });
 
             var content = source.contents.toString();
-            expect(content).toBe('source\n//# sourceMappingUrl=b.map');
+            expect(content).toBe('source\n//# sourceMappingURL=b.map');
             done();
         })
         .catch(function(e) {
