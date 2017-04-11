@@ -1,6 +1,6 @@
 {
   "name": "gulp-jspm-build",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Gulp task to run jspm build.",
   "main": "index.js",
   "scripts": {
