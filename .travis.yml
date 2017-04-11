@@ -1,7 +1,9 @@
 ---
 language: node_js
 node_js:
-  - 'iojs'
+  - 4
+  - 6
+  - 7
 env:
   global:
     - COVERAGE=false
@@ -10,3 +12,11 @@ matrix:
     - env: COVERAGE=true
 after_success:
   - "[ $COVERAGE == false ] || npm run istanbul -- --report text-summary"
+deploy:
+    provider: npm
+    email: buddhike.desilva@geeksdiary.com
+    api_key:
+        secure: rIEzSyMfMNKC1QAWv5VMxXzt7dtCtBsTDK7sQU7tvkur/ZPRmpY2AdqKQibIwuDxjdA6p4trUS87BuQ+eFUXwajYVkccfQEO5Z+b8e76cjxriThefd7BMBs/IuDU4Gy6yY0AtELPUw3Mfg7Z4zaXoIyJ7FPiR0cxCHInP/D6fP69xSc/u4pfhBpXP+lhnio1mebxAF+SItbHluI/W2i6u7wGxY1C1bRYmxiU7TXBtwsm8IxS2Jn0ERnpMRQKX3ohpt6kqQCode+3jy5T9YcHbmGE0o5MHO/ppiKTlCEzYuTNA53x7bt2t97XlGXyqCUOFNwGuAaZRFqBMwpmiLbNzpCyT+aNcMSicdjs21QQTrE3ITIVUoFzZ938MnoFOHGl+hJUwqi8IOlY4o+E9Jw8wdagrYkU/A8rf6rLxBbwjZjerZfsaxIp0t6fpf22jP7WFIU5wJwFzg8NopbmtMgANLl93JC5gpCoL/ZwytF5gt5ENKqIzyZUzhzBXIsIFJa4ec85zyDBbe7P0uYjvnFZBaztxW1iwP1Z78EXV3tv/1ex+z0FhIOHuQ72jD8HKXp1g4XJOTwdtoYqkQkvRJkoaUTrxlbpl0awcAAENJjv4HkV3dRpMpd8lVDDvgRxmN954LmkDC2qPzy8vjC6O/408jz1hTNvC2p79cGT2wk4bow=
+    on:
+        tags: false
+        repo: buddyspike/gulp-jspm-build
